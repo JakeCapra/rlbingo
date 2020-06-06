@@ -3,6 +3,8 @@ import GitHubLogo from './images/githubLogo.png';
 import SteamLogo from './images/steamLogo.png';
 import youTubeLogo from './images/youTubeLogo.png';
 import redditLogo from './images/redditLogo.png';
+import RankSelector from './RankSelector';
+import { GetBingoTileItems } from '../repositories/BingoItemRepository';
 
 class Table extends React.Component {
     constructor(props) {
@@ -19,19 +21,13 @@ class Table extends React.Component {
             addedTiles: [],
             useAdded: false,
             sleepAmt: 200,
+            selectedMaxLevel: 0
         }
+        this.rankSelected = this.rankSelected.bind(this);
     }
 
     loadText = () => {
-        var tileText = ["Get Asked to Sign Profile","Score a Hat Trick","Opponent has Anime PP","Someone Missed an Open Net","Toxicity in Chat", 
-                        "Pre-flip Goal","Low Five","Someone own Goals","Flip-Reset Goal","Opponent Using Weird Car", 
-                        "3 Minute Overtime","Passing Play Goal","Score a 0 Second Goal","Ceiling Shot","Opponent rage quit (ff)", 
-                        "Get into Rule #1","Fake an Opponent","Make an Epic Save","Musty Flick Goal","Demo Both Opponents (In succession)", 
-                        "Team Pinch Goal","Get a Lag Indicator","Double Tap Goal","Someone whiffs","Bump/Demo Goal", 
-                        "You Miss Boost", "Map is Salty Shores (day or night)", "Team Double Commits", "Opponents Double Commits", "Turtle Goal", 
-                        "Someone's using Poof Goal Explosion", "Get 3 Assists", "Get 3 Saves", "Have the Best Ping in Lobby", "Score 2 Goals in the first Minute",
-                        "Whiff a Flick"
-                        ];
+        var availableTiles = GetBingoTileItems(this.state.selectedMaxLevel);
 
         var usedIndex = [];
         var usedIndexLoad = [];
@@ -49,11 +45,11 @@ class Table extends React.Component {
         for (i=0; i<insertAmt; i++) {
             do
                     {
-                        var index = Math.floor(Math.random() * tileText.length);
+                        var index = Math.floor(Math.random() * availableTiles.length);
 
                     } while (usedIndexLoad.includes(index));
                     usedIndexLoad.push(index);
-                    tileArr.push(tileText[index]);
+                    tileArr.push(availableTiles[index]);
                     console.log(index)
         }
 
@@ -202,6 +198,9 @@ class Table extends React.Component {
         }
         this.forceUpdate();
     }
+    rankSelected(value) {
+        this.setState({ selectedMaxLevel: value });
+    }
 
     render () {
         let content, content2;
@@ -267,6 +266,7 @@ class Table extends React.Component {
             <React.Fragment>
                 <div style={leftDiv}>
                     <button onClick={this.loadText} >Create Board</button>
+                    <RankSelector onRankSelected={this.rankSelected} />
                     <h1>This is Rocket League Bingo!</h1>
                     
                     <div>
