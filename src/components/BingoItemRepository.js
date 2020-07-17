@@ -12,7 +12,7 @@ const bronzeItems = [];
 
 const silverItems = ["Passing Play Goal", "Fake an Opponent", "Get 3 Assists", "Get 3 Saves"];
 
-const goldItems = [""];
+const goldItems = [];
 
 const platinumItems = ["Turtle Goal", "Someone says they should be ranked higher"];
 
