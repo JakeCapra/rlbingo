@@ -4,7 +4,7 @@ import SteamLogo from './images/steamLogo.png';
 import youTubeLogo from './images/youTubeLogo.png';
 import redditLogo from './images/redditLogo.png';
 import RankSelector from './RankSelector';
-import { GetBingoTileItems } from '../repositories/BingoItemRepository';
+import { GetBingoTileItems } from './BingoItemRepository';
 
 class Table extends React.Component {
     constructor(props) {
