@@ -4,7 +4,7 @@ const sharedItems = ["Score a Hat Trick","Opponent has Anime PP","Someone Missed
     "You Miss Boost", "Map is Salty Shores (day or night)", "Team Double Commits", "Opponents Double Commits", 
     "Someone's using Poof Goal Explosion", "Have the Best Ping in Lobby", "Score 2 Goals in the first Minute", "Whiff a Flick",
     "Someone's using an Esport Decal", "Score an Air Dribble", "Champions Field Announcer says 'What a Save'", "Get demoed",
-    "Hit the crossbar", "Someone gets a ghost hit", "Get MVP", "Score a flick goal", "Someone copmplains about a teammate",
+    "Hit the crossbar", "Someone gets a ghost hit", "Get MVP", "Score a flick goal", "Someone complains about a teammate",
     "Someone steals a goal", "Opponent has LFT in their name", "Someone's using a topper", "Map is Neo Tokyo", "Map is Wasteland",
     "Map is Farmstead", "Someone has a GC title"];
 
