@@ -6,6 +6,23 @@ import redditLogo from './images/redditLogo.png';
 import RankSelector from './RankSelector';
 import { GetBingoTileItems } from './BingoItemRepository';
 import WinScreen from './winScreen';
+import Peer from 'peerjs';
+
+const peer = new Peer('123456');
+const conn = peer.connect('654321');
+conn.on('open', () => {
+  conn.send('hi!');
+});
+
+peer.on('connection', (conn) => {
+    conn.on('data', (data) => {
+      // Will print 'hi!'
+      console.log(data);
+    });
+    conn.on('open', () => {
+      conn.send('hello!');
+    });
+  });
 
 class Table extends React.Component {
     constructor(props) {
