@@ -29,6 +29,7 @@ class Table extends React.Component {
     }
 
     loadText = () => {
+        this.state.showPopup = false;
         var availableTiles = GetBingoTileItems(this.state.selectedMaxLevel);
 
         var usedIndex = [];
@@ -187,6 +188,7 @@ class Table extends React.Component {
                 tmp.style.backgroundColor = "red";
             }
         }
+        this.state.showPopup = false;
         this.forceUpdate();
     }
 
