@@ -5,6 +5,7 @@ import youTubeLogo from './images/youTubeLogo.png';
 import redditLogo from './images/redditLogo.png';
 import RankSelector from './RankSelector';
 import { GetBingoTileItems } from './BingoItemRepository';
+import WinScreen from './winScreen';
 
 class Table extends React.Component {
     constructor(props) {
@@ -21,7 +22,8 @@ class Table extends React.Component {
             addedTiles: [],
             useAdded: false,
             sleepAmt: 200,
-            selectedMaxLevel: 0
+            selectedMaxLevel: 0,
+            showPopup: false,
         }
         this.rankSelected = this.rankSelected.bind(this);
     }
@@ -75,7 +77,17 @@ class Table extends React.Component {
         this.forceUpdate();
     }
 
+    togglePopup() {  
+        this.setState({  
+             showPopup: !this.state.showPopup  
+        });
+        console.log(this.state.showPopup);
+    }  
+
+
     handleClick = (i, j, e) => {
+        // var winScr = document.getElementById("winScreen");
+        // winScr.style.color = "pink";
         if (e.target.style.backgroundColor === "red") {
             e.target.style.backgroundColor = "green";
             this.state.rows[i][j].marked = true;
@@ -106,7 +118,7 @@ class Table extends React.Component {
             }
             if (pass) {
                 await sleep(slpAmt);
-                alert("you win");
+                this.togglePopup(this)
                 return;
             }
         }
@@ -124,7 +136,7 @@ class Table extends React.Component {
             }
             if (pass) {
                 await sleep(slpAmt);
-                alert("you win");
+                this.togglePopup(this)
                 return;
             }
         }
@@ -141,7 +153,7 @@ class Table extends React.Component {
         }
         if (pass) {
             await sleep(slpAmt);
-            alert("you win");
+            this.togglePopup(this)
             return;
         }
 
@@ -159,7 +171,7 @@ class Table extends React.Component {
         }
         if (pass) {
             await sleep(slpAmt);
-            alert("you win");
+            this.togglePopup(this)
             return;
         }
 
@@ -203,11 +215,12 @@ class Table extends React.Component {
     }
 
     render () {
-        let content, content2;
+        let content;
         var added = [];
-        let resetBtn;
+        let resetBtn, winScreen;
         const display = this.disp;
         const dispAdded = this.useAdded;
+        const win = this.win;
         if (display) {
             content = 
                 <table align="center" cellSpacing="0" cellPadding="0" style={tableStyle}>
@@ -289,6 +302,11 @@ class Table extends React.Component {
                 </div>
                 <div style={rightDiv}>
                     {content}
+                    <div>
+                        {this.state.showPopup ?  
+                        < WinScreen text='Click "Close Button" to hide popup' closePopup={this.togglePopup.bind(this)} />  
+                        : null}
+                    </div>
                 </div>
             </React.Fragment>
         );
@@ -345,5 +363,7 @@ const linkStyle = {
     textDecoration: "none",
     color: "inherit"
 }
+
+
 
 export default Table;
