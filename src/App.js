@@ -1,7 +1,8 @@
 import React from 'react';
-import Main from './components/main';
 import bg from './components/images/bg.png';
 import bgvid from './components/images/dropshotbg.mp4';
+import Table from './components/table.js';
+
 
 
 function App() {
@@ -10,7 +11,7 @@ function App() {
         <video autoPlay="true" loop="true" muted="true" id="bgVid">
             <source src={bgvid} type="video/mp4" />
         </video>
-        <Main />
+        <Table />
 
     </div>
   );
