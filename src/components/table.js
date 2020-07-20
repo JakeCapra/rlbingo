@@ -86,8 +86,8 @@ class Table extends React.Component {
 
 
     handleClick = (i, j, e) => {
-        // var winScr = document.getElementById("winScreen");
-        // winScr.style.color = "pink";
+        if (this.state.showPopup)
+            return;
         if (e.target.style.backgroundColor === "red") {
             e.target.style.backgroundColor = "green";
             this.state.rows[i][j].marked = true;
