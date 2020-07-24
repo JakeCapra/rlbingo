@@ -8,8 +8,8 @@ import { GetBingoTileItems } from './BingoItemRepository';
 import WinScreen from './winScreen';
 import Peer from 'peerjs';
 
-const peer = new Peer('123456');
-const conn = peer.connect('654321');
+const peer = new Peer('654321');
+const conn = peer.connect('123456');
 conn.on('open', () => {
   conn.send('hi!');
 });
