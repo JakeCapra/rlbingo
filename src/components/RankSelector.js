@@ -14,7 +14,7 @@ class RankSelector extends React.Component {
 
     render() {
         return(
-            <select onChange={this.updateRank}>
+            <select onChange={this.updateRank} id='rankSelect'>
                 <option value="0" selected>(Select your Rank)</option>
                 <option value="1">Bronze</option>
                 <option value="2">Silver</option>

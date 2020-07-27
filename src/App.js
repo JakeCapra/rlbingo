@@ -8,7 +8,7 @@ import Table from './components/table.js';
 function App() {
   return (
     <div>
-        <video autoPlay="true" loop="true" muted="true" id="bgVid">
+        <video autoPlay={true} loop={true} muted={true} id="bgVid">
             <source src={bgvid} type="video/mp4" />
         </video>
         <Table />

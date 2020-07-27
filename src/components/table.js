@@ -24,9 +24,27 @@ class Table extends React.Component {
             sleepAmt: 200,
             selectedMaxLevel: 0,
             showPopup: false,
+            //for screen dimensions
+            width: 0, height: 0
+            
         }
         this.rankSelected = this.rankSelected.bind(this);
+        //for screen dimensions
+        this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
     }
+
+    //for screen dimensions -https://stackoverflow.com/questions/36862334/get-viewport-window-height-in-reactjs
+    componentDidMount() {
+        this.updateWindowDimensions();
+        window.addEventListener('resize', this.updateWindowDimensions);
+    }
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.updateWindowDimensions);
+    }
+    updateWindowDimensions() {
+        this.setState({ width: window.innerWidth, height: window.innerHeight });
+    }
+
 
     loadText = () => {
         this.state.showPopup = false;
@@ -105,13 +123,10 @@ class Table extends React.Component {
         var pass=false;
         let temp = this.state.rows;
         let slpAmt = this.state.sleepAmt;
-        
         //horizontal check
         for (var i=0; i<5; i++) {
             for (var j=0; j<5; j++) {
-                if (temp[i][j].marked) {
-                    pass=true;
-                }
+                if (temp[i][j].marked) {pass=true;}
                 else {
                     pass=false;
                     break;
@@ -123,13 +138,10 @@ class Table extends React.Component {
                 return;
             }
         }
-
         //vertical check
         for (i=0; i<5; i++) {
             for (j=0; j<5; j++) {
-                if (temp[j][i].marked) {
-                    pass=true;
-                }
+                if (temp[j][i].marked) {pass=true;}
                 else {
                     pass=false;
                     break;
@@ -141,12 +153,9 @@ class Table extends React.Component {
                 return;
             }
         }
-
         //diagonal check - left to right
         for (i=0; i<5; i++) {
-            if (temp[i][i].marked) {
-                pass=true;
-            }
+            if (temp[i][i].marked) {pass=true;}
             else {
                 pass=false;
                 break;
@@ -157,7 +166,6 @@ class Table extends React.Component {
             this.togglePopup(this)
             return;
         }
-
         //diagonal check - right to left
         j = 4;
         for (i=0; i<5; i++) {
@@ -179,6 +187,9 @@ class Table extends React.Component {
     } 
 
     reset = () => {
+        if (!this.disp) {
+            return;
+        }
         for (var i=0; i<5; i++) {
             for (var j=0; j<5; j++) {
                 this.state.rows[i][j].marked = false;
@@ -217,12 +228,46 @@ class Table extends React.Component {
     }
 
     render () {
-        let content;
+        let content, sidePannel, topPannel, customTile, aboutPannel;
         var added = [];
-        let resetBtn, winScreen;
-        const display = this.disp;
-        const dispAdded = this.useAdded;
-        const win = this.win;
+        const display = this.disp, dispAdded = this.useAdded;
+
+        if (this.state.width > 600) {
+            sidePannel = 
+                <div id='leftDiv'>
+                    <button onClick={this.loadText} >Create Board</button>
+                    <RankSelector onRankSelected={this.rankSelected} />
+                    <h1>This is Rocket League Bingo!</h1>
+                    
+                    <div>
+                        <form onSubmit={this.noReload}>
+                        <input id="inputBox" type="text" placeholder="Enter a bingo tile" />
+                        </form>
+                        <button onClick={this.onSubmit}>Enter</button>
+                        <button onClick={this.reset}>Reset</button>
+                        <div id="customInputDiv">{added}</div>
+                    </div>
+                    <h3>This is based off a video made by <a href="https://www.youtube.com/channel/UCocHtA1ADT6kTObipYzJoww">SunlessKhan</a></h3>
+                    <h3>
+                        <a style={linkStyle} href="https://www.youtube.com/watch?v=-3aVf_LilUc" target="_blank"><img className="logoLink" src={youTubeLogo}></img></a>
+                        <a style={linkStyle} href="https://www.reddit.com/r/RocketLeague/" target="_blank"><img className="logoLink" src={redditLogo}></img></a>
+                        </h3>
+                    <h3>
+                        <a style={linkStyle} href="https://github.com/JakeCapra/rlbingo" target="_blank"><img className="logoLink" src={GitHubLogo}></img></a>
+                        <a style={linkStyle} href="https://steamcommunity.com/id/hip_dips/" target="_blank"><img className="logoLink" src={SteamLogo}></img></a>
+                    </h3>
+            </div>
+        }
+        else {
+            topPannel = 
+             <div id='topPannel'>
+                <h1>This is Rocket League Bingo!</h1>
+                <button onClick={this.loadText} style={{fontSize: '2vw'}}>Create Board</button>
+                <RankSelector onRankSelected={this.rankSelected} />
+             </div>
+
+        }
+
         if (display) {
             content = 
                 <table align="center" cellSpacing="0" cellPadding="0" style={tableStyle}>
@@ -264,7 +309,6 @@ class Table extends React.Component {
                         </tr>
                         </tbody>
                 </table>
-                resetBtn = <button onClick={this.reset}>Reset</button>;
         }
         if (dispAdded) {
             for (var i=0; i<this.state.addedTiles.length; i++) {
@@ -279,30 +323,9 @@ class Table extends React.Component {
 
         return (
             <React.Fragment>
-                <div style={leftDiv}>
-                    <button onClick={this.loadText} >Create Board</button>
-                    <RankSelector onRankSelected={this.rankSelected} />
-                    <h1>This is Rocket League Bingo!</h1>
-                    
-                    <div>
-                        <form onSubmit={this.noReload}>
-                        <input id="inputBox" type="text" placeholder="Enter a bingo tile" />
-                        </form>
-                        <button onClick={this.onSubmit}>Enter</button>
-                        {resetBtn}
-                        <div id="customInputDiv">{added}</div>
-                    </div>
-                    <h3>This is based off a video made by <a href="https://www.youtube.com/channel/UCocHtA1ADT6kTObipYzJoww">SunlessKhan</a></h3>
-                    <h3>
-                        <a style={linkStyle} href="https://www.youtube.com/watch?v=-3aVf_LilUc" target="_blank"><img className="logoLink" src={youTubeLogo}></img></a>
-                        <a style={linkStyle} href="https://www.reddit.com/r/RocketLeague/" target="_blank"><img className="logoLink" src={redditLogo}></img></a>
-                        </h3>
-                    <h3>
-                        <a style={linkStyle} href="https://github.com/JakeCapra/rlbingo" target="_blank"><img className="logoLink" src={GitHubLogo}></img></a>
-                        <a style={linkStyle} href="https://steamcommunity.com/id/hip_dips/" target="_blank"><img className="logoLink" src={SteamLogo}></img></a>
-                    </h3>
-                </div>
-                <div style={rightDiv}>
+                {topPannel}
+                {sidePannel}
+                <div id='rightDiv'>
                     {content}
                     <div>
                         {this.state.showPopup ?  
@@ -341,24 +364,6 @@ const itemStyle = {
     background: "red",
     userSelect: "none",
     cursor: "grab"
-}
-
-const leftDiv = {
-    float: "left",
-    width: "15%",
-    minHeight: "99%",
-    background: "purple",
-    opacity: ".9",
-    color: "white",
-    border: '3px solid white',
-    textAlign: "center",
-    position: "absolute",
-}
-
-const rightDiv = {
-    width: "80%",
-    float: "right",
-    textAlign: "center",
 }
 
 const linkStyle = {
