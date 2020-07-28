@@ -8,7 +8,7 @@ class Popup extends React.Component {
     return (  
             <div className='popup' style={popup} className={'fade'}>  
                 <div className='popupInner' style={popupInner}>  
-                    <video width="80%" height="auto" autoPlay="true" loop="true" muted="true" id="winVid" style={{float: 'left', margin: '1vw'}}>
+                    <video width="80%" height="auto" autoPlay={true} loop={true} muted={true} id="winVid" style={{float: 'left', margin: '1vw'}}>
                         <source src={winVid} type="video/mp4" />
                     </video>
                     <h2 style={{paddingTop: '5vw'}}>You Win!</h2>

@@ -1,4 +1,4 @@
-body {
+html, body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -71,6 +71,42 @@ th:hover {
   color: white;
 }
 
+table {
+    table-layout: fixed;
+    width: 100%;
+    height: 100%;
+    border: 5px solid white;
+    margin: 0;
+    padding-top: .5vw;
+    text-align: center;
+}
+/*Row*/
+tr {
+  /* width: 3vw;
+  height: 3vw; */
+  /* width: 20%;
+  height: 20%; */
+  width: 15%;
+  height: 15%;
+  position: relative;
+}
+/*Cell*/
+th {
+  overflow: hidden;
+  padding: 3.2vw;
+  opacity: 0.75;
+  border: 1px solid white;
+  background-color: red;
+  user-select: none;
+  cursor: grab;
+  /* width: 3vw;
+  height: 3vw; */
+  /* width: 20%;
+  height: 20%;
+  position: relative; */
+}
+
+
 #customInputDiv {
   height: 10vw;
   width: 100%;
@@ -90,15 +126,16 @@ th:hover {
 }
 
 #rightDiv {
-  width: 80%;
+  width: 75%;
   float: right;
   text-align: center;
+  padding-right: 5%;
 }
 
 #topPannel {
   position: absolute;
   clear: both;
-  min-width: 100%;
+  width: 99%;
   background: purple;
   opacity: .9;
   color: white;
@@ -117,9 +154,28 @@ th:hover {
     border: 2px solid white;
     transition: all .25s ease-in-out;
   }
-  #rankSelect {
+  #rankSelect{
     font-size: 2vw;
   }
+  .selectValue {
+    font-size: 2.5vw;
+  }
+  table {
+    table-layout: "fixed";
+    width: 100%;
+    border: 5px solid white;
+    margin: 0;
+    text-align: center;
+  }
+  #rightDiv {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+#rankSelect, .selectValue {
+  background-color: purple;
+  color: white;
 }
 
 

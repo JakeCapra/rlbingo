@@ -55,7 +55,6 @@ class Table extends React.Component {
         let tileArr =[]; // tiles to added to board
 
         for (var i=0; i<this.state.addedTiles.length; i++) {
-            console.log(this.state.addedTiles[i].use + " " + this.state.addedTiles[i].title);
             if (this.state.addedTiles[i].use) {
                 tileArr.push(this.state.addedTiles[i].title);
             }
@@ -71,7 +70,6 @@ class Table extends React.Component {
                     } while (usedIndexLoad.includes(index));
                     usedIndexLoad.push(index);
                     tileArr.push(availableTiles[index]);
-                    console.log(index)
         }
 
         for (i = 0; i < 5; i++) {
@@ -100,19 +98,19 @@ class Table extends React.Component {
         this.setState({  
              showPopup: !this.state.showPopup  
         });
-        console.log(this.state.showPopup);
     }  
 
 
-    handleClick = (i, j, e) => {
+    handleClick = (i, j) => {
         if (this.state.showPopup)
             return;
-        if (e.target.style.backgroundColor === "red") {
-            e.target.style.backgroundColor = "green";
+        var cell = document.getElementById(i.concat(j));
+        if (cell.style.backgroundColor != "green") {
+            cell.style.backgroundColor = "green";
             this.state.rows[i][j].marked = true;
         }
         else {
-            e.target.style.backgroundColor = "red";
+            cell.style.backgroundColor = "red";
             this.state.rows[i][j].marked = false;
         }
         this.checkWin();
@@ -195,7 +193,6 @@ class Table extends React.Component {
                 this.state.rows[i][j].marked = false;
                 var id = i.toString() + j.toString();
                 var tmp = document.getElementById(id);
-                console.log("ID = " + id);
                 tmp.style.backgroundColor = "red";
             }
         }
@@ -270,42 +267,42 @@ class Table extends React.Component {
 
         if (display) {
             content = 
-                <table align="center" cellSpacing="0" cellPadding="0" style={tableStyle}>
+                <table align="center" cellSpacing="0" cellPadding="0">
                     <tbody>
-                        <tr style={rowStyle}>
-                            <th id="00" style={itemStyle} onClick={(e) => this.handleClick("0", "0", e)}>{this.state.rows[0][0].title}</th>
-                            <th id="01" style={itemStyle} onClick={(e) => this.handleClick("0", "1", e)}>{this.state.rows[0][1].title}</th>
-                            <th id="02" style={itemStyle} onClick={(e) => this.handleClick("0", "2", e)}>{this.state.rows[0][2].title}</th>
-                            <th id="03" style={itemStyle} onClick={(e) => this.handleClick("0", "3", e)}>{this.state.rows[0][3].title}</th>
-                            <th id="04" style={itemStyle} onClick={(e) => this.handleClick("0", "4", e)}>{this.state.rows[0][4].title}</th>
+                        <tr>
+                            <th id="00" onClick={(e) => this.handleClick("0", "0")}>{this.state.rows[0][0].title}</th>
+                            <th id="01" onClick={(e) => this.handleClick("0", "1")}>{this.state.rows[0][1].title}</th>
+                            <th id="02" onClick={(e) => this.handleClick("0", "2")}>{this.state.rows[0][2].title}</th>
+                            <th id="03" onClick={(e) => this.handleClick("0", "3")}>{this.state.rows[0][3].title}</th>
+                            <th id="04" onClick={(e) => this.handleClick("0", "4")}>{this.state.rows[0][4].title}</th>
                         </tr>
-                        <tr style={rowStyle}>
-                            <th id="10" style={itemStyle} onClick={(e) => this.handleClick("1", "0", e)}>{this.state.rows[1][0].title}</th>
-                            <th id="11" style={itemStyle} onClick={(e) => this.handleClick("1", "1", e)}>{this.state.rows[1][1].title}</th>
-                            <th id="12" style={itemStyle} onClick={(e) => this.handleClick("1", "2", e)}>{this.state.rows[1][2].title}</th>
-                            <th id="13" style={itemStyle} onClick={(e) => this.handleClick("1", "3", e)}>{this.state.rows[1][3].title}</th>
-                            <th id="14" style={itemStyle} onClick={(e) => this.handleClick("1", "4", e)}>{this.state.rows[1][4].title}</th>
+                        <tr>
+                            <th id="10" onClick={(e) => this.handleClick("1", "0")}>{this.state.rows[1][0].title}</th>
+                            <th id="11" onClick={(e) => this.handleClick("1", "1")}>{this.state.rows[1][1].title}</th>
+                            <th id="12" onClick={(e) => this.handleClick("1", "2")}>{this.state.rows[1][2].title}</th>
+                            <th id="13" onClick={(e) => this.handleClick("1", "3")}>{this.state.rows[1][3].title}</th>
+                            <th id="14" onClick={(e) => this.handleClick("1", "4")}>{this.state.rows[1][4].title}</th>
                         </tr>
-                        <tr style={rowStyle}>
-                            <th id="20" style={itemStyle} onClick={(e) => this.handleClick("2", "0", e)}>{this.state.rows[2][0].title}</th>
-                            <th id="21" style={itemStyle} onClick={(e) => this.handleClick("2", "1", e)}>{this.state.rows[2][1].title}</th>
-                            <th id="22" style={itemStyle} onClick={(e) => this.handleClick("2", "2", e)}>{this.state.rows[2][2].title}</th>
-                            <th id="23" style={itemStyle} onClick={(e) => this.handleClick("2", "3", e)}>{this.state.rows[2][3].title}</th>
-                            <th id="24" style={itemStyle} onClick={(e) => this.handleClick("2", "4", e)}>{this.state.rows[2][4].title}</th>
+                        <tr>
+                            <th id="20" onClick={(e) => this.handleClick("2", "0")}>{this.state.rows[2][0].title}</th>
+                            <th id="21" onClick={(e) => this.handleClick("2", "1")}>{this.state.rows[2][1].title}</th>
+                            <th id="22" onClick={(e) => this.handleClick("2", "2")}>{this.state.rows[2][2].title}</th>
+                            <th id="23" onClick={(e) => this.handleClick("2", "3")}>{this.state.rows[2][3].title}</th>
+                            <th id="24" onClick={(e) => this.handleClick("2", "4")}>{this.state.rows[2][4].title}</th>
                         </tr>
-                        <tr style={rowStyle}>
-                            <th id="30" style={itemStyle} onClick={(e) => this.handleClick("3", "0", e)}>{this.state.rows[3][0].title}</th>
-                            <th id="31" style={itemStyle} onClick={(e) => this.handleClick("3", "1", e)}>{this.state.rows[3][1].title}</th>
-                            <th id="32" style={itemStyle} onClick={(e) => this.handleClick("3", "2", e)}>{this.state.rows[3][2].title}</th>
-                            <th id="33" style={itemStyle} onClick={(e) => this.handleClick("3", "3", e)}>{this.state.rows[3][3].title}</th>
-                            <th id="34" style={itemStyle} onClick={(e) => this.handleClick("3", "4", e)}>{this.state.rows[3][4].title}</th>
+                        <tr>
+                            <th id="30" onClick={(e) => this.handleClick("3", "0")}>{this.state.rows[3][0].title}</th>
+                            <th id="31" onClick={(e) => this.handleClick("3", "1")}>{this.state.rows[3][1].title}</th>
+                            <th id="32" onClick={(e) => this.handleClick("3", "2")}>{this.state.rows[3][2].title}</th>
+                            <th id="33" onClick={(e) => this.handleClick("3", "3")}>{this.state.rows[3][3].title}</th>
+                            <th id="34" onClick={(e) => this.handleClick("3", "4")}>{this.state.rows[3][4].title}</th>
                         </tr>
-                        <tr style={rowStyle}>
-                            <th id="40" style={itemStyle} onClick={(e) => this.handleClick("4", "0", e)}>{this.state.rows[4][0].title}</th>
-                            <th id="41" style={itemStyle} onClick={(e) => this.handleClick("4", "1", e)}>{this.state.rows[4][1].title}</th>
-                            <th id="42" style={itemStyle} onClick={(e) => this.handleClick("4", "2", e)}>{this.state.rows[4][2].title}</th>
-                            <th id="43" style={itemStyle} onClick={(e) => this.handleClick("4", "3", e)}>{this.state.rows[4][3].title}</th>
-                            <th id="44" style={itemStyle} onClick={(e) => this.handleClick("4", "4", e)}>{this.state.rows[4][4].title}</th>
+                        <tr>
+                            <th id="40" onClick={(e) => this.handleClick("4", "0")}>{this.state.rows[4][0].title}</th>
+                            <th id="41" onClick={(e) => this.handleClick("4", "1")}>{this.state.rows[4][1].title}</th>
+                            <th id="42" onClick={(e) => this.handleClick("4", "2")}>{this.state.rows[4][2].title}</th>
+                            <th id="43" onClick={(e) => this.handleClick("4", "3")}>{this.state.rows[4][3].title}</th>
+                            <th id="44" onClick={(e) => this.handleClick("4", "4")}>{this.state.rows[4][4].title}</th>
                         </tr>
                         </tbody>
                 </table>
@@ -341,30 +338,6 @@ class Table extends React.Component {
 const sleep = (milliseconds) => {
         return new Promise(resolve => setTimeout(resolve, milliseconds))
       }
-
-const tableStyle = {
-    tableLayout: "fixed",
-    width: "80%",
-    border: '5px solid white',
-    margin: "0",
-    paddingTop: ".5vw",
-    textAlign: "center"
-}
-
-const rowStyle = {
-    width: "15%",
-    position: "relative",
-}
-
-const itemStyle = {
-    overflow: "hidden",
-    padding: "3.2vw", 
-    opacity: "0.75",
-    border: '1px solid white',
-    background: "red",
-    userSelect: "none",
-    cursor: "grab"
-}
 
 const linkStyle = {
     textDecoration: "none",

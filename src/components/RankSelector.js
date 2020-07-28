@@ -15,16 +15,16 @@ class RankSelector extends React.Component {
     render() {
         return(
             <select onChange={this.updateRank} id='rankSelect'>
-                <option value="0" selected>(Select your Rank)</option>
-                <option value="1">Bronze</option>
-                <option value="2">Silver</option>
-                <option value="3">Gold</option>
-                <option value="4">Platinum</option>
-                <option value="5">Diamond</option>
-                <option value="6">Champ</option>
-                <option value="7">Grand Champ</option>
-                <option value="8">Celebrity</option>
-                <option value="9">Pro</option>
+                <option value="0" selected className='selectValue'>(Select your Rank)</option>
+                <option value="1" className='selectValue'>Bronze</option>
+                <option value="2" className='selectValue'>Silver</option>
+                <option value="3" className='selectValue'>Gold</option>
+                <option value="4" className='selectValue'>Platinum</option>
+                <option value="5" className='selectValue'>Diamond</option>
+                <option value="6" className='selectValue'>Champ</option>
+                <option value="7" className='selectValue'>Grand Champ</option>
+                <option value="8" className='selectValue'>Celebrity</option>
+                <option value="9" className='selectValue'>Pro</option>
             </select>
         );
     }
