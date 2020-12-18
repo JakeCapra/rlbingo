@@ -6,9 +6,9 @@ class Popup extends React.Component {
   
     render() {  
     return (  
-            <div className='popup' style={popup} className={'fade'}>  
+            <div className='popup' style={popup}>
                 <div className='popupInner' style={popupInner}>  
-                    <video width="80%" height="auto" autoPlay="true" loop="true" muted="true" id="winVid" style={{float: 'left', margin: '1vw'}}>
+                    <video width="80%" height="auto" autoPlay={true} loop={true} muted={true} id="winVid" style={{float: 'left', margin: '1vw'}}>
                         <source src={winVid} type="video/mp4" />
                     </video>
                     <h2 style={{paddingTop: '5vw'}}>You Win!</h2>
@@ -21,7 +21,7 @@ class Popup extends React.Component {
 }
 
 const popup = {
-    position: 'fixed',
+    //position: 'fixed',
     width: '50%' ,
     height: '50%',
     top: '0',
@@ -36,7 +36,7 @@ const popup = {
 }
 
 const popupInner = {
-    position: 'absolute',
+    //position: 'absolute',
     left: '5%',  
     right:'5%',
     top: '5%',
@@ -46,8 +46,8 @@ const popupInner = {
     background: 'purple',
     opacity: '1',
     color: 'white',
-    textAlign: 'center',
-    clear: 'both',
+    //textAlign: 'center',
+    //clear: 'both',
     overflow: 'hidden'
 }
 
